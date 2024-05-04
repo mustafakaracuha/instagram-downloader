@@ -89,7 +89,7 @@ function App() {
                         videoData[0].type === "jpg" && (
                             <div className="w-full flex flex-col items-center justify-start">
                                 <span className="w-full h-[1.5px] bg-slate-800 mt-7 mb-7 rounded-xl"></span>
-                                <div className="w-48 h-48 bg-slate-800 rounded-2xl overflow-hidden">
+                                <div className="w-48 h-48 max-sm:w-full bg-slate-800 rounded-2xl overflow-hidden">
                                     <img src={videoData[0]?.thumb} className="w-full h-full object-cover" />
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
-# Fetch More Data with One Click
+# Instagram Reel or Post Downloader
 
 <p align="start">
-  <img src="https://github.com/mustafakaracuha/fetch-more-data/blob/main/src/assets/app4.png" alt="Detail" width="auto" />
+  <img src="https://github.com/mustafakaracuha/instagram-downloader/blob/main/src/assets/app.png" alt="Detail" width="auto" />
 </p>
 
 ## How to Use

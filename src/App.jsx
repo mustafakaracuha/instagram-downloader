@@ -57,9 +57,9 @@ function App() {
                             onChange={(e) => setVideoUrl(e.target.value)}
                         />
                         <button
-                            className="bg-gradient-to-r flex items-center disabled:opacity-50 justify-center  max-sm:mt-4 transition-all duration-300 from-[#833AB4] border-2 border-slate-900 text-white to-[#C13584] max-sm:w-[20rem] w-32 h-14 rounded-xl"
+                            className="bg-gradient-to-r flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-center max-sm:mt-4 transition-all duration-300 from-[#833AB4] border-2 border-slate-900 text-white to-[#C13584] max-sm:w-[20rem] w-32 h-14 rounded-xl"
                             onClick={videoData ? handleDownload : handleView}
-                            disabled={!videoUrl}
+                            disabled={!videoUrl || !videoUrl.includes("instagram.com")}
                         >
                             {isLoading && <CgSpinner size={22} className="animate-spin mr-2" />} {videoData ? "Download" : "View"}
                         </button>

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-
-import { downloadInstagramVideo } from "./api/api";
-import "./index.css";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 import { CgSpinner } from "react-icons/cg";
 import { FaInstagram, FaGithub } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa6";
 
+import { downloadInstagramVideo } from "./api/api";
 import db from "./firabase/firebase.js";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
+import "./index.css";
 
 function App() {
     const [videoUrl, setVideoUrl] = useState("");
@@ -78,7 +77,7 @@ function App() {
             window.open(videoLink, "_blank");
             setDownloadCount((prevCount) => prevCount + 1);
             updateVideoViewCount(downloadCount + 1);
-            toast.success("Downloaded Successfull")
+            toast.success("Downloaded Successfull");
         }
     };
 

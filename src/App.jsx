@@ -14,7 +14,9 @@ function App() {
     const [videoUrl, setVideoUrl] = useState("");
     const [videoData, setVideoData] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [viewCount, setViewCount] = useState(0);
+
+    const [downloadCount, setDownloadCount] = useState(0);
+    const [isCountLoading, setIsCoundLoading] = useState(false);
 
     useEffect(() => {
         getVideoViewCount();
@@ -22,13 +24,18 @@ function App() {
 
     const getVideoViewCount = async () => {
         try {
+            setIsCoundLoading(true);
             const docRef = await doc(db, "videoViews", "viewCount");
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                setViewCount(docSnap.data().count);
+                setDownloadCount(docSnap.data().count);
+                setTimeout(() => {
+                    setIsCoundLoading(false);
+                }, 1000);
             }
         } catch (error) {
+            setIsCoundLoading(false);
             console.error("Error getting count:", error);
         }
     };
@@ -36,8 +43,8 @@ function App() {
     const updateVideoViewCount = async (newcount) => {
         try {
             const docRef = await doc(db, "videoViews", "viewCount");
-
             await updateDoc(docRef, { count: newcount });
+            getVideoViewCount();
         } catch (error) {
             console.error("Error updating count:", error);
         }
@@ -58,8 +65,8 @@ function App() {
 
     const handleDownload = async () => {
         if (videoData && videoData[0]?.link) {
-            setViewCount((prevCount) => prevCount + 1);
-            updateVideoViewCount(viewCount + 1);
+            setDownloadCount((prevCount) => prevCount + 1);
+            updateVideoViewCount(downloadCount + 1);
             const videoLink = videoData[0].link;
             window.open(videoLink, "_blank");
         }
@@ -75,11 +82,11 @@ function App() {
                 }
             >
                 <div className="flex items-start flex-col">
-                    <h1 className="text-xl max-sm:text-lg font-semibold text-slate-400 flex items-center">
+                    <h1 className="text-xl max-sm:text-lg font-semibold text-slate-400 flex items-center justify-center">
                         <span>
                             <FaInstagram size={23} className="mr-2 text-white" />
                         </span>
-                        <p className="mr-2 text-2xl from-[#8a49a1] via-[#c1558b] to-[#ffc273] bg-gradient-to-r bg-clip-text text-transparent">Instagram</p> Reel or Post Downloader
+                        <span className="mr-2 text-2xl from-[#8a49a1] via-[#c1558b] to-[#ffc273] bg-gradient-to-r bg-clip-text text-transparent">Instagram</span>Reel or Post Downloader
                     </h1>
                     <div className="flex max-sm:flex-col items-center mt-6">
                         <input
@@ -129,14 +136,20 @@ function App() {
                             </div>
                         )
                     )}
-                    <div className="w-full flex items-center justify-between mt-10">
-                        <p className="mr-4 text-slate-400 flex items-center text-[15px] justify-center cursor-pointer transition-all duration-300 hover:text-slate-300">
-                            <FaDownload size={16} className="mr-2" />
-                            Total Download : {viewCount}
-                        </p>
+                    <div className="w-full flex items-center justify-between mt-10 transition-all duration-300">
+                        {downloadCount !== 0 &&
+                            (isCountLoading ? (
+                                <CgSpinner size={20} className="animate-spin mr-2 text-slate-400" />
+                            ) : (
+                                <p className="mr-4 text-slate-400 flex items-center max-sm:text-sm text-[15px] justify-center cursor-pointer transition-all duration-300 hover:text-slate-300">
+                                    <FaDownload size={16} className="mr-2" />
+                                    Total Download : {downloadCount}
+                                </p>
+                            ))}
+
                         <p
                             onClick={() => window.open("https://github.com/mustafakaracuha", "_blank")}
-                            className="text-slate-400 flex items-center text-[15px] justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
+                            className="text-slate-400 flex items-center max-sm:text-sm text-[15px] justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
                         >
                             <FaGithub size={19} className="mr-2" />
                             mustafakaracuha

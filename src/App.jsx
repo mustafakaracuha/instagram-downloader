@@ -8,7 +8,8 @@ import { FaInstagram, FaGithub } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa6";
 
 import db from "./firabase/firebase.js";
-import { count, doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 function App() {
     const [videoUrl, setVideoUrl] = useState("");
@@ -55,9 +56,17 @@ function App() {
             setIsLoading(true);
             try {
                 const data = await downloadInstagramVideo(videoUrl);
-                setVideoData(data);
+                if (data.length === 0) {
+                    toast.error("api error");
+                    setIsLoading(false);
+                    setVideoData(null);
+                    setVideoUrl("");
+                } else {
+                    setVideoData(data);
+                    setIsLoading(false);
+                }
             } catch (error) {
-                console.error(error);
+                console.error("hata");
             }
             setIsLoading(false);
         }
@@ -65,10 +74,11 @@ function App() {
 
     const handleDownload = async () => {
         if (videoData && videoData[0]?.link) {
-            setDownloadCount((prevCount) => prevCount + 1);
-            updateVideoViewCount(downloadCount + 1);
             const videoLink = videoData[0].link;
             window.open(videoLink, "_blank");
+            setDownloadCount((prevCount) => prevCount + 1);
+            updateVideoViewCount(downloadCount + 1);
+            toast.success("Downloaded Successfull")
         }
     };
 
@@ -82,9 +92,9 @@ function App() {
                 }
             >
                 <div className="flex items-start flex-col">
-                    <h1 className="text-xl max-sm:text-lg font-semibold text-slate-400 flex items-center justify-center">
+                    <h1 className="text-xl max-sm:text-[17.5px] font-semibold text-slate-400 flex items-center justify-center">
                         <span>
-                            <FaInstagram size={23} className="mr-2 text-white" />
+                            <FaInstagram size={23} className="mr-1 text-white" />
                         </span>
                         <span className="mr-2 text-2xl from-[#8a49a1] via-[#c1558b] to-[#ffc273] bg-gradient-to-r bg-clip-text text-transparent">Instagram</span>Reel or Post Downloader
                     </h1>
@@ -92,19 +102,19 @@ function App() {
                         <input
                             autoFocus
                             type="text"
-                            className="w-[25rem] text-slate-300 placeholder:text-slate-600 bg-slate-800 p-4 border-2 border-slate-700 rounded-xl max-sm:w-[20rem] max-sm:mr-0 mr-4 outline-none transition-all duration-300 focus:border-slate-400"
+                            className="w-[25rem] text-slate-300 placeholder:text-slate-600 bg-slate-800 p-4  border-2 border-slate-700 rounded-xl max-sm:w-[20rem] max-sm:mr-0 mr-4 outline-none transition-all duration-300 focus:border-slate-400"
                             placeholder="Reel or Post Url"
                             value={videoUrl}
                             onChange={(e) => setVideoUrl(e.target.value)}
                         />
                         <button
-                            className="bg-gradient-to-r font-semibold flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-center max-sm:mt-4 transition-all duration-300 bg-[#4f5bd5] text-white    border-2 border-slate-900 max-sm:w-[20rem] w-32 h-[3.8rem] rounded-xl"
+                            className="bg-gradient-to-r font-semibold flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-center max-sm:mt-4 transition-all duration-300 bg-[#4f5bd5] text-white  border-2 border-slate-900 max-sm:w-[20rem] w-32 h-[3.8rem] rounded-xl"
                             onClick={videoData ? handleDownload : handleView}
                             disabled={!videoUrl || !videoUrl.includes("instagram.com/p/")}
                         >
-                            {isLoading && <CgSpinner size={22} className="animate-spin mr-2" />} {videoData ? "Download" : "View"}
+                            {isLoading && <CgSpinner size={22} className="animate-spin mr-2" />} {videoData?.length > 0 ? "Download" : "View"}
                         </button>
-                        {videoData && (
+                        {videoData?.length > 0 && (
                             <button
                                 className="flex ml-2 bg-slate-800 hover:bg-slate-800 items-center active:scale-105 justify-center max-sm:mt-3 transition-all duration-300 border-2 border-slate-900 text-white max-sm:w-[20rem] w-32 h-[3.8rem] rounded-xl"
                                 onClick={() => {
@@ -127,7 +137,7 @@ function App() {
                         </div>
                     ) : (
                         videoData &&
-                        videoData[0].type === "jpg" && (
+                        videoData[0]?.type === "jpg" && (
                             <div className="w-full flex flex-col items-center justify-start">
                                 <span className="w-full h-[1.5px] bg-slate-800 mt-7 mb-7 rounded-xl"></span>
                                 <div className="w-48 h-48 max-sm:w-full bg-slate-800 rounded-2xl overflow-hidden">

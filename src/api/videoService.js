@@ -1,4 +1,3 @@
-// src/services/videoService.js dosyası
 import { firestore } from "../firabase/firebase";
 
 const videoCollection = firestore.collection("videoViews");

@@ -50,7 +50,8 @@ function App() {
         }
     };
 
-    const handleView = async () => {
+    const handleView = async (e) => {
+        e.preventDefault()
         if (videoUrl) {
             setIsLoading(true);
             try {
@@ -71,7 +72,8 @@ function App() {
         }
     };
 
-    const handleDownload = async () => {
+    const handleDownload = async (e) => {
+        e.preventDefault()
         if (videoData && videoData[0]?.link) {
             const videoLink = videoData[0].link;
             window.open(videoLink, "_blank");
@@ -82,6 +84,7 @@ function App() {
     };
 
     return (
+        <form onSubmit={videoData ? handleDownload : handleView}>
         <div className="w-full h-screen flex flex-col items-center justify-center lg:bg-black sm:bg-slate-900 max-sm:bg-slate-900 md:bg-slate-900">
             <div
                 className={
@@ -109,7 +112,7 @@ function App() {
                         <button
                             className="bg-gradient-to-r font-semibold flex items-center disabled:opacity-50 disabled:cursor-not-allowed justify-center max-sm:mt-4 transition-all duration-300 bg-[#4f5bd5] text-white  border-2 border-slate-900 max-sm:w-[20rem] w-32 h-[3.8rem] rounded-xl"
                             onClick={videoData ? handleDownload : handleView}
-                            disabled={!videoUrl || !videoUrl.includes("instagram.com/p/")}
+                            disabled={!videoUrl}
                         >
                             {isLoading && <CgSpinner size={22} className="animate-spin mr-2" />} {videoData?.length > 0 ? "Download" : "View"}
                         </button>
@@ -145,13 +148,13 @@ function App() {
                             </div>
                         )
                     )}
-                    <div className="w-full flex items-center justify-between mt-10 transition-all duration-300">
+                    <div className="w-full flex items-center justify-start mt-10 transition-all duration-300">
                         {downloadCount !== 0 &&
                             (isCountLoading ? (
                                 <CgSpinner size={20} className="animate-spin mr-2 text-slate-400" />
                             ) : (
-                                <p className="mr-4 text-slate-400 flex items-center max-sm:text-sm text-[15px] justify-center cursor-pointer transition-all duration-300 hover:text-slate-300">
-                                    <FaDownload size={16} className="mr-2" />
+                                <p className="text-slate-400 flex items-center max-sm:text-sm text-[14px] h-6 justify-center transition-all duration-300">
+                                    <FaDownload size={14} className="mr-2" />
                                     Total Download : {downloadCount}
                                 </p>
                             ))}
@@ -180,6 +183,7 @@ function App() {
                 </p>
             </div>
         </div>
+        </form  >
     );
 }
 

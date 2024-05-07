@@ -1,7 +1,7 @@
 # Instagram Reel or Post Downloader
 
 <p align="center">
-  <img src="https://github.com/mustafakaracuha/react-dashboard-design/blob/main/src/assets/app.screenshot.png" alt="Home" width="100%" />
+  <img src="https://github.com/mustafakaracuha/instagram-downloader/blob/main/src/assets/app4.png" alt="Home" width="100%" />
 </p>
 
 This project utilizes the following technologies and libraries:

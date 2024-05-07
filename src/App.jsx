@@ -3,7 +3,7 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 import { CgSpinner } from "react-icons/cg";
-import { FaInstagram, FaGithub } from "react-icons/fa";
+import { FaInstagram, FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa6";
 
 import { downloadInstagramVideo } from "./api/api";
@@ -82,7 +82,7 @@ function App() {
     };
 
     return (
-        <div className="w-full h-screen flex items-center justify-center lg:bg-black sm:bg-slate-900 max-sm:bg-slate-900 md:bg-slate-900">
+        <div className="w-full h-screen flex flex-col items-center justify-center lg:bg-black sm:bg-slate-900 max-sm:bg-slate-900 md:bg-slate-900">
             <div
                 className={
                     videoData && videoData[0]?.link
@@ -155,16 +155,29 @@ function App() {
                                     Total Download : {downloadCount}
                                 </p>
                             ))}
-
-                        <p
-                            onClick={() => window.open("https://github.com/mustafakaracuha", "_blank")}
-                            className="text-slate-400 flex items-center max-sm:text-sm text-[15px] justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
-                        >
-                            <FaGithub size={19} className="mr-2" />
-                            mustafakaracuha
-                        </p>
                     </div>
                 </div>
+            </div>
+            <div className="w-full absolute bottom-3 flex items-center justify-center gap-x-4">
+                <p
+                    onClick={() => window.open("https://github.com/mustafakaracuha", "_blank")}
+                    className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
+                >
+                    <FaGithub size={19} className="mr-2 max-sm:text-[10px]" />
+                    mustafakaracuha
+                </p>
+                <span className="text-slate-600">|</span>
+                <p
+                    onClick={() => window.open("https://www.linkedin.com/in/mustafakaracuha/", "_blank")}
+                    className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
+                >
+                    <FaLinkedin size={19} className="mr-2" />
+                    mustafakaracuha
+                </p>
+                <span className="text-slate-600">|</span>
+                <p className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300">
+                    &copy; {new Date().getFullYear()} Mustafa Karaçuha
+                </p>
             </div>
         </div>
     );

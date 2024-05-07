@@ -161,24 +161,24 @@ function App() {
                     </div>
                 </div>
             </div>
-            <div className="w-full absolute bottom-3 flex items-center justify-center gap-x-4">
+            <div className="w-full absolute bottom-3 flex items-center justify-center gap-x-3">
                 <p
                     onClick={() => window.open("https://github.com/mustafakaracuha", "_blank")}
-                    className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
+                    className="text-slate-600 flex items-center max-sm:text-[10px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
                 >
-                    <FaGithub size={17} className="mr-2 max-sm:text-[10px]" />
+                    <FaGithub size={16} className="mr-2 max-sm:text-[10px]" />
                     mustafakaracuha
                 </p>
                 <span className="text-slate-600">|</span>
                 <p
                     onClick={() => window.open("https://www.linkedin.com/in/mustafakaracuha/", "_blank")}
-                    className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
+                    className="text-slate-600 flex items-center max-sm:text-[10px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
                 >
-                    <FaLinkedin size={17} className="mr-2" />
+                    <FaLinkedin size={16} className="mr-2" />
                     mustafakaracuha
                 </p>
                 <span className="text-slate-600">|</span>
-                <p className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300">
+                <p className="text-slate-600 flex items-center max-sm:text-[10px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300">
                     &copy; {new Date().getFullYear()} Mustafa Karaçuha
                 </p>
             </div>

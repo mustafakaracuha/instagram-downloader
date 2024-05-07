@@ -166,7 +166,7 @@ function App() {
                     onClick={() => window.open("https://github.com/mustafakaracuha", "_blank")}
                     className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
                 >
-                    <FaGithub size={19} className="mr-2 max-sm:text-[10px]" />
+                    <FaGithub size={17} className="mr-2 max-sm:text-[10px]" />
                     mustafakaracuha
                 </p>
                 <span className="text-slate-600">|</span>
@@ -174,7 +174,7 @@ function App() {
                     onClick={() => window.open("https://www.linkedin.com/in/mustafakaracuha/", "_blank")}
                     className="text-slate-600 flex items-center max-sm:text-[12px] text-sm justify-center cursor-pointer transition-all duration-300 hover:text-slate-300"
                 >
-                    <FaLinkedin size={19} className="mr-2" />
+                    <FaLinkedin size={17} className="mr-2" />
                     mustafakaracuha
                 </p>
                 <span className="text-slate-600">|</span>

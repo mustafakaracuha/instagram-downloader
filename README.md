@@ -4,7 +4,7 @@ This project utilizes the following technologies and libraries:
 
 - React: A JavaScript library for building user interfaces.
 - TailwindCss: A utility-first CSS framework for rapidly building custom designs.
-- Material-UI: A popular UI framework for React applications.
+- Firebase: A platform developed by Google for creating mobile and web applications.
 - react-icons: A library for adding icons to your React application.
 
 ## How to Use
